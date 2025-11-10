@@ -29,3 +29,4 @@ resource "google_project_iam_member" "bindings" {
   member   = "serviceAccount:${each.value.account_id}@${each.value.project_id}.iam.gserviceaccount.com"
 }
 
+
