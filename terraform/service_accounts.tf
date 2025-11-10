@@ -16,7 +16,7 @@ locals {
 }
 
 resource "google_service_account" "service_accounts" {
-  for_each     = { for sa in local.list_service_accountsname : sa.name => sa }
+  for_each     = { for sa in local.list_service_accountsname.service_accounts : sa.name => sa }
   account_id   = each.value.name
   display_name = each.value.display_name
 }
