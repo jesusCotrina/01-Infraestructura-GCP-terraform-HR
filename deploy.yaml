@@ -24,3 +24,6 @@ steps:
           terraform plan -out=tfplan
           terraform apply -auto-approve -state=tfplan
           echo "termino despliegue..."
+          
+options:
+  logging: CLOUD_LOGGING_ONLY
