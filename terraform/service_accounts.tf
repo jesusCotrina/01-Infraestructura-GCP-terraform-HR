@@ -19,6 +19,7 @@ resource "google_service_account" "service_accounts" {
   for_each     = { for sa in local.list_service_accountsname.service_accounts : sa.name => sa }
   account_id   = each.value.name
   display_name = each.value.display_name
+  project      = each.value.project_id
 }
 
 resource "google_project_iam_member" "bindings" {
