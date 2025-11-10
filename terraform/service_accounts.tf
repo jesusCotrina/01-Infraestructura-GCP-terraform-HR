@@ -2,7 +2,7 @@ locals {
   list_service_accountsname = jsondecode(file(abspath("../service-account/service-accounts.json")))
   list_sa_roles = {
     for sa_role in flatten([
-      for sa in local.list_service_accountsname : [
+      for sa in local.list_service_accountsname.service_accounts : [
         for role in sa.roles : {
           key        = "${sa.name}-${role}"
           project_id = sa.project_id
