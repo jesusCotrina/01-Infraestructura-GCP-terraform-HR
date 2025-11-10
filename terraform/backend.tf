@@ -3,6 +3,7 @@ terraform {
   backend "gcs" {
     bucket = "artifacts-development-tf-state" 
     prefix = "state/init"
+    
   }
 }
 
