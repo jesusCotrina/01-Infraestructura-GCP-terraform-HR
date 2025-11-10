@@ -10,7 +10,6 @@ steps:
         echo "rama $BRANCH_NAME"
         echo "Repositorio: $REPO_NAME"
         echo "Commit: $COMMIT_SHA"
-        echo "Trigger: $BUILD_TRIGGER_NAME"
 
   - id: "Desplegar Infraestructura"
     name: hashicorp/terraform:1.7.0
@@ -24,6 +23,6 @@ steps:
           terraform plan -out=tfplan
           terraform apply -auto-approve -state=tfplan
           echo "termino despliegue..."
-          
+
 options:
   logging: CLOUD_LOGGING_ONLY
