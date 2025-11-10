@@ -1,26 +1,26 @@
 steps:
-  -id: "Inicio"
-  -name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
-  -entrypoint: "bash"
-  -args:
-    - "-c"
-    - |
-      # Autenticarse con GCP
-      echo "Iniciado despliegue"
-      echo "rama $BRANCH_NAME"
-      echo "Repositorio: $REPO_NAME"
-      echo "Commit: $COMMIT_SHA"
-      echo "Trigger: $BUILD_TRIGGER_NAME"
-
-  -id: "Desplegar Infraestructura"
-  -name: hashicorp/terraform:1.7.0
-  -entrypoint: sh
-  -args:
-      - -c
+  - id: "Inicio"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: "bash"
+    args:
+      - "-c"
       - |
-        cd terraform
-        echo "====Ejecutando terraform===="
-        terraform init -input=false
-        terraform plan -out=tfplan
-        terraform apply -auto-approve -state=tfplan
-        echo "termino despliegue..."
+        # Autenticarse con GCP
+        echo "Iniciado despliegue"
+        echo "rama $BRANCH_NAME"
+        echo "Repositorio: $REPO_NAME"
+        echo "Commit: $COMMIT_SHA"
+        echo "Trigger: $BUILD_TRIGGER_NAME"
+
+  - id: "Desplegar Infraestructura"
+    name: hashicorp/terraform:1.7.0
+    entrypoint: sh
+    args:
+        - -c
+        - |
+          cd terraform
+          echo "====Ejecutando terraform===="
+          terraform init -input=false
+          terraform plan -out=tfplan
+          terraform apply -auto-approve -state=tfplan
+          echo "termino despliegue..."
