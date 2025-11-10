@@ -20,7 +20,11 @@ steps:
           cd terraform
           echo "====Ejecutando terraform===="
           terraform init -input=false
+
+          echo "====Ejecutando plan===="
           terraform plan -out=tfplan
+
+          echo "====Ejecutando apply===="
           terraform apply -auto-approve -state=tfplan
           echo "termino despliegue..."
 
