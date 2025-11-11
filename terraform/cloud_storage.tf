@@ -3,7 +3,7 @@ locals {
 }
 
 resource "google_storage_bucket" "buckets" {
-  for_each = { for bkt in local.bucket_config.buckets : bkt.name => sa }
+  for_each = { for bkt in local.bucket_config.buckets : bkt.name => bkt }
 
   name                        = each.value.name
   project                     = each.value.project
