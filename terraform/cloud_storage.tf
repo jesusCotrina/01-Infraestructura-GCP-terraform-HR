@@ -3,7 +3,7 @@ locals {
 }
 
 resource "google_storage_bucket" "buckets" {
-  for_each = local.bucket_config.buckets 
+  for_each = { for bkt in local.bucket_config.buckets : bkt.name => sa }
 
   name                        = each.value.name
   project                     = each.value.project
@@ -50,5 +50,5 @@ resource "google_storage_bucket" "buckets" {
       num_newer_versions = 2   # conservar solo 2 versiones previas
     }
   }
-  
+
 }
