@@ -19,7 +19,7 @@
     },
 
     {
-      "name": "rs_nonprod_data_rwz_trrf_scpts",
+      "name": "rawzone-tf-backend-state-frmk-scrp",
       "project": "data-engineer-410822",
       "location": "US-EAST4",
       "storage_class": "NEARLINE",
