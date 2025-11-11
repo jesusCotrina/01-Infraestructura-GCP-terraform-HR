@@ -22,7 +22,7 @@
       "name": "rawzone-tf-backend-state-frmk-scrp",
       "project": "data-engineer-410822",
       "location": "US-EAST4",
-      "storage_class": "NEARLINE",
+      "storage_class": "STANDARD",
       "uniform_bucket_level_access": true,
       "versioning": false,
       "force_destroy": true,
