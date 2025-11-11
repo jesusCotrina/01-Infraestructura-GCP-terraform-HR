@@ -1,0 +1,35 @@
+{
+  "buckets": [
+    {
+      "name": "data-rawzone-dev",
+      "project": "data-engineer-410822",
+      "location": "US-CENTRAL1",
+      "storage_class": "STANDARD",
+      "uniform_bucket_level_access": true,
+      "versioning": true,
+      "force_destroy": true,
+      "public_access_prevention": "enforced",
+      "retention_policy": {
+          "retention_days": 1
+        },
+      "labels": {
+          "env": "dev",
+          "team": "data"
+        }
+    },
+
+    {
+      "name": "rs_nonprod_data_rwz_trrf_scpts",
+      "project": "data-engineer-410822",
+      "location": "US-EAST4",
+      "storage_class": "NEARLINE",
+      "uniform_bucket_level_access": true,
+      "versioning": false,
+      "force_destroy": true,
+      "labels": {
+        "env": "prod",
+        "team": "analytics"
+      }
+    }
+  ]
+}
