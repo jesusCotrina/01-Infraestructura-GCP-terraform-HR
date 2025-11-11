@@ -26,6 +26,7 @@
       "uniform_bucket_level_access": true,
       "versioning": false,
       "force_destroy": true,
+      "public_access_prevention": "enforced",
       "labels": {
         "env": "prod",
         "team": "analytics"
