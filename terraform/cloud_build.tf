@@ -38,14 +38,6 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
     }
   }
 
-  dynamic "trigger_template" {
-    for_each = each.value.event_type == "push" ? [1] : []
-    content {
-      branch_name = "^${lookup(each.value, "branch_name", local.config_env.branch_name)}$"
-      repo_name   = basename(each.value.repo_uri)
-    }
-  }
-
   dynamic "github" {
   for_each = each.value.repo_type == "GITHUB" ? [1] : []
 
