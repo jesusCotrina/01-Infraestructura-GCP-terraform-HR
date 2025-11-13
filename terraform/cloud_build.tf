@@ -34,7 +34,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   dynamic "pubsub_config" {
     for_each = each.value.event_type == "pubsub" ? [1] : []
     content {
-      topic = "projects/${local.config_env.project_id}/topics/${each.value.pubsub_topic}"
+      topic = "projects/${each.value.project_id}/topics/${each.value.pubsub_topic}"
     }
   }
 
