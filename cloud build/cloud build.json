@@ -8,7 +8,7 @@
       "event_type": "push", 
       "branch_name": "develop",
       "repo_uri": "https://github.com/jesusCotrina/Framework-Scraping-Web-Publica-v1",
-      "service_account": "sa-cloudbuild",
+      "service_account": "deploy-framework-dev@data-engineer-410822.iam.gserviceaccount.com",
       "owner_repo": "jesusCotrina",
       "pubsub_topic": "",
       "project_id": "data-engineer-410822",
@@ -22,8 +22,8 @@
       "file_yaml": "deploy_frontend.yaml",
       "repo_type": "GITHUB",
       "repo_uri": "https://github.com/Rimac-Seguros/MDM-GCP-plataforma-raw-extraccion-datos",
-      "service_account": "sa-cloudbuild",
-      "owner_repo": "jcotrina",
+      "service_account": "etl-dev@data-engineer-410822.iam.gserviceaccount.com",
+      "owner_repo": "jesusCotrina",
       "project_id": "data-engineer-410822",
       "region": "us-east4"
     }

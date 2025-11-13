@@ -8,9 +8,9 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
 
   name        = "${each.value.name}-${local.config_env.pre_env_name}"
   description = each.value.description
-  project     = each.value.project
+  project     = each.value.project_id
   location    = each.value.region
-  service_account = "projects/${each.value.project}/serviceAccounts/${each.value.service_account}"
+  service_account = "projects/${each.value.project_id}/serviceAccounts/${each.value.service_account}"
 
   dynamic "git_file_source" {
     for_each = each.value.repo_uri != null ? [1] : []
@@ -34,7 +34,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   dynamic "pubsub_config" {
     for_each = each.value.event_type == "pubsub" ? [1] : []
     content {
-      topic = "projects/${local.config_env.project}/topics/${each.value.pubsub_topic}"
+      topic = "projects/${local.config_env.project_id}/topics/${each.value.pubsub_topic}"
     }
   }
 
@@ -76,14 +76,14 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   dynamic "webhook_config" {
     for_each = each.value.event_type == "webhook" ? [1] : []
     content {
-      secret = "projects/${local.config_env.project}/secrets/webhook-secret/versions/latest"
+      secret = "projects/${local.config_env.project_id}/secrets/webhook-secret/versions/latest"
     }
   }
 
   substitutions = {   
       _ENV_NAME=   local.config_env.env_name 
-      _PROJECT_ID=each.value.project
-      _REGION_ID= each.value.project
+      _PROJECT_ID=each.value.project_id
+      _REGION_ID= each.value.project_id
     }
 
 }
