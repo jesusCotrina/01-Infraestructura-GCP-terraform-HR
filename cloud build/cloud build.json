@@ -1,0 +1,31 @@
+{
+  "c": [
+     {
+      "name":"deploy-frmk-scraping",
+      "description": "Despliegue automático del framework de scraping web pública",
+      "file_yaml": "deploy.yaml",
+      "repo_type": "GITHUB",
+      "event_type": "push", 
+      "branch_name": "develop",
+      "repo_uri": "https://github.com/jesusCotrina/Framework-Scraping-Web-Publica-v1",
+      "service_account": "sa-cloudbuild",
+      "owner_repo": "jesusCotrina",
+      "pubsub_topic": "",
+      "project_id": "data-engineer-410822",
+      "region": "us-east4"
+    },
+    {
+      "name":"deploy-frontend",
+      "description": "Despliegue del frontend con Pub/Sub",
+      "event_type": "pubsub",
+      "pubsub_topic": "topic-frontend",
+      "file_yaml": "deploy_frontend.yaml",
+      "repo_type": "GITHUB",
+      "repo_uri": "https://github.com/Rimac-Seguros/MDM-GCP-plataforma-raw-extraccion-datos",
+      "service_account": "sa-cloudbuild",
+      "owner_repo": "jcotrina",
+      "project_id": "data-engineer-410822",
+      "region": "us-east4"
+    }
+]
+}
