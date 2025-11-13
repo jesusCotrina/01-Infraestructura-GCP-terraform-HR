@@ -1,5 +1,5 @@
 {
-  "c": [
+  "triggers": [
      {
       "name":"deploy-frmk-scraping",
       "description": "Despliegue automático del framework de scraping web pública",
