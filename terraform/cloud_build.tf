@@ -62,15 +62,6 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
       }
     }
 
-    # Push de tags
-    dynamic "push_tag" {
-      for_each = each.value.event_type == "push_tag" ? [1] : []
-      content {
-        tag          = "^${lookup(each.value, "tag_pattern", "v.*")}$"
-        invert_regex = false
-      }
-    }
-
     # Pull request
     dynamic "pull_request" {
       for_each = each.value.event_type == "pull_request" ? [1] : []
@@ -79,12 +70,6 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
       }
     }
   }
-  }
-
-  # Activador manual (sin evento)
-  dynamic "manual" {
-    for_each = each.value.event_type == "manual" ? [1] : []
-    content {}
   }
 
   # Webhook
