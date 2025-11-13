@@ -17,7 +17,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
     content {
       path      = "${each.value.file_yaml}"
       repo_type = each.value.repo_type
-      revision  = "^${lookup(each.value, "branch_name", local.lis_config_env.branch_name)}$"
+      revision  = "^${lookup(each.value, "branch_name", local.config_env.branch_name)}$"
       uri       = each.value.repo_uri
     }
   }
@@ -26,7 +26,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
     for_each = each.value.repo_uri != null ? [1] : []
     content {
       uri       = each.value.repo_uri
-      ref       = "refs/heads/${lookup(each.value, "branch_name", local.lis_config_env.branch_name)}"
+      ref       = "refs/heads/${lookup(each.value, "branch_name", local.config_env.branch_name)}"
       repo_type = each.value.repo_type
     }
   }
@@ -34,14 +34,14 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   dynamic "pubsub_config" {
     for_each = each.value.event_type == "pubsub" ? [1] : []
     content {
-      topic = "projects/${local.lis_config_env.project}/topics/${each.value.pubsub_topic}"
+      topic = "projects/${local.config_env.project}/topics/${each.value.pubsub_topic}"
     }
   }
 
   dynamic "trigger_template" {
     for_each = each.value.event_type == "push" ? [1] : []
     content {
-      branch_name = "^${lookup(each.value, "branch_name", local.lis_config_env.branch_name)}$"
+      branch_name = "^${lookup(each.value, "branch_name", local.config_env.branch_name)}$"
       repo_name   = basename(each.value.repo_uri)
     }
   }
@@ -57,7 +57,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
     dynamic "push" {
       for_each = each.value.event_type == "push" ? [1] : []
       content {
-        branch       = "^${lookup(each.value, "branch_name", local.lis_config_env.branch_name)}$"
+        branch       = "^${lookup(each.value, "branch_name", local.config_env.branch_name)}$"
         invert_regex = false
       }
     }
@@ -66,7 +66,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
     dynamic "pull_request" {
       for_each = each.value.event_type == "pull_request" ? [1] : []
       content {
-        branch = "^${lookup(each.value, "branch_name", local.lis_config_env.branch_name)}$"
+        branch = "^${lookup(each.value, "branch_name", local.config_env.branch_name)}$"
       }
     }
   }
@@ -76,7 +76,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   dynamic "webhook_config" {
     for_each = each.value.event_type == "webhook" ? [1] : []
     content {
-      secret = "projects/${local.lis_config_env.project}/secrets/webhook-secret/versions/latest"
+      secret = "projects/${local.config_env.project}/secrets/webhook-secret/versions/latest"
     }
   }
 
