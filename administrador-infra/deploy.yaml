@@ -17,16 +17,11 @@ steps:
     args:
       - -c
       - |
-        ls -la /workspace
-        ls -la /workspace/.git
+        REPO_URL="https://github.com/$REPO_OWNER/$REPO_NAME.git"
 
-        git fetch --unshallow 2>/dev/null || git fetch --all --tags
-
-        # Verificar si el fetch funcionó
-        if [ $? -ne 0 ]; then
-          echo "Error al obtener el historial de Git."
-          exit 1
-        fi
+        echo "Clonando repo manualmente..."
+        git clone "$REPO_URL" repo
+        cd repo
 
         _PREV_COMMIT=$(git rev-parse "$COMMIT_SHA^1")
 
