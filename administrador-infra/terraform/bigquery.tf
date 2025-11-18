@@ -11,4 +11,5 @@ resource "google_bigquery_dataset" "dataset" {
   location      = each.value.location
   friendly_name = each.value.friendly_name
   description   = each.value.description
+  project       = each.value.project_id
 }

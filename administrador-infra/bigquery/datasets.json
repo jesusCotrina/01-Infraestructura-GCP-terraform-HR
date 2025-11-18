@@ -4,13 +4,15 @@
       "dataset_name": "scraping_data",
       "location": "US-EAST4",
       "friendly_name": "Dataset Framework Scraping",
-      "description": "Contiene tablas con datos obtenidos mediante scraping"
+      "description": "Contiene tablas con datos obtenidos mediante scraping",
+      "project_id": "data-engineer-410822"
     },
     {
       "dataset_name": "de__external",
       "location": "US-EAST4",
       "friendly_name": "Dataset de Data Entrys Externos",
-      "description": "Contiene Data Entrys cargados desde fuentes externas"
+      "description": "Contiene Data Entrys cargados desde fuentes externas",
+      "project_id": "data-engineer-410822"
     }
   ]
 }
