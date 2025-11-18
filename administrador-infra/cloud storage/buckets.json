@@ -1,7 +1,7 @@
 {
   "buckets": [
     {
-      "name": "data-rawzone-jcotrina",
+      "name": "data-rawzone-hr",
       "project": "data-engineer-410822",
       "description": "Bucket de Raw Zone para datos en crudo",
       "location": "US-CENTRAL1",
