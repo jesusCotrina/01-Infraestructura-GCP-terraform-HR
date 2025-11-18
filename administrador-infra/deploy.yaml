@@ -18,7 +18,7 @@ steps:
       - -c
       - |
         echo "== Clonando repo con historial =="
-        git clone https://source.developers.google.com/p/$PROJECT_ID/r/$REPO_NAME repo
+        git clone https://source.developers.google.com/p/$_PROJECT_ID/r/$REPO_NAME repo
         cd repo
 
         git checkout $COMMIT_SHA
@@ -63,4 +63,4 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
-  PROJECT_ID: "data-engineer-410822"
+  _PROJECT_ID: "data-engineer-410822"
