@@ -36,7 +36,7 @@ steps:
 
         if [ -z "$_PREV_COMMIT" ]; then
             # Si no hay commit previo (primer push), listamos todos los directorios service/
-            _CHANGED_FILES=$(find service/ -type f)
+            _CHANGED_FILES=$(find administrador-infra/ -type f)
         else
             # Obtenemos la lista completa de archivos cambiados
             _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
