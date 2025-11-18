@@ -23,12 +23,12 @@ steps:
 
         git checkout $COMMIT_SHA
 
-        PREV_COMMIT=$(git rev-parse "${COMMIT_SHA}~1")
+        _PREV_COMMIT=$(git rev-parse "${COMMIT_SHA}~1")
 
         echo "Commit actual: $COMMIT_SHA"
-        echo "Commit previo : $PREV_COMMIT"
+        echo "Commit previo : $_PREV_COMMIT"
 
-        CHANGED=$(git diff --name-only $PREV_COMMIT $COMMIT_SHA | grep "service/" | head -n 1)
+        CHANGED=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA | grep "service/" | head -n 1)
 
         if [ -z "$CHANGED" ]; then
           echo "No changes found in cloud-run-scraping/"
