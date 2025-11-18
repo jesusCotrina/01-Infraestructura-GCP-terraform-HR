@@ -28,15 +28,15 @@ steps:
         echo "Commit actual: $COMMIT_SHA"
         echo "Commit previo : $_PREV_COMMIT"
 
-        CHANGED=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA | grep "service/" | head -n 1)
+        _CHANGED=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA | grep "service/" | head -n 1)
 
-        if [ -z "$CHANGED" ]; then
+        if [ -z "$_CHANGED" ]; then
           echo "No changes found in cloud-run-scraping/"
           echo "MODIFIED_FOLDER=" >> /workspace/env.sh
           exit 0
         fi
 
-        FOLDER=$(echo $CHANGED | cut -d'/' -f1-3)
+        FOLDER=$(echo $_CHANGED | cut -d'/' -f1-3)
 
         echo "Carpeta modificada: $FOLDER"
         echo "MODIFIED_FOLDER=$FOLDER" >> /workspace/env.sh
