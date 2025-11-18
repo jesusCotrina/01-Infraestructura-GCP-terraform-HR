@@ -42,17 +42,17 @@ steps:
             _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
         fi
 
-        _MODIFIED_FOLDERS_LIST=$(echo "$_CHANGED_FILES" | grep "administrador-infra/" | cut -d'/' -f1-3 | sort | uniq)
+        _MODIFIED_FOLDERS_LIST=$(echo "$_CHANGED_FILES" | grep "administrador-infra/" | cut -d'/' -f1-2 | sort | uniq)
 
         if [ -z "$_MODIFIED_FOLDERS_LIST" ]; then
-          echo "No se encontraron cambios en ninguna carpeta dentro de administrador-infra/"
+          echo "No se encontraron cambios relevantes en administrador-infra/."
           echo "_MODIFIED_FOLDER=" >> /workspace/env.sh
+        else
+          echo "--- Carpetas modificadas encontradas ---"
+          echo "$_MODIFIED_FOLDERS_LIST"
+          echo "----------------------------------------"
+          echo "_MODIFIED_FOLDER_LIST=\"$_MODIFIED_FOLDERS_LIST\"" >> /workspace/env.sh
         fi
-
-        echo "--- Carpetas modificadas encontradas ---"
-        echo "$_MODIFIED_FOLDERS_LIST"
-        echo "----------------------------------------"
-        echo "_MODIFIED_FOLDER_LIST=\"$_MODIFIED_FOLDERS_LIST\"" >> /workspace/env.sh
 
 
   - id: "Desplegar Infraestructura"
