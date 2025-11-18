@@ -30,24 +30,23 @@ steps:
 
         if [ -z "$_PREV_COMMIT" ]; then
             # Si no hay commit previo (primer push), listamos todos los directorios service/
-            CHANGED_FILES=$(find service/ -type f)
+            _CHANGED_FILES=$(find service/ -type f)
         else
             # Obtenemos la lista completa de archivos cambiados
-            CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
+            _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
         fi
 
-        MODIFIED_FOLDERS_LIST=$(echo "$CHANGED_FILES" | grep "administrador-infra/" | cut -d'/' -f1-3 | sort | uniq)
+        _MODIFIED_FOLDERS_LIST=$(echo "$_CHANGED_FILES" | grep "administrador-infra/" | cut -d'/' -f1-3 | sort | uniq)
 
-        if [ -z "$MODIFIED_FOLDERS_LIST" ]; then
+        if [ -z "$_MODIFIED_FOLDERS_LIST" ]; then
           echo "No se encontraron cambios en ninguna carpeta dentro de service/"
-          echo "MODIFIED_FOLDER=" >> /workspace/env.sh
-          exit 0 # Salir si no hay nada que desplegar
+          echo "_MODIFIED_FOLDER=" >> /workspace/env.sh
         fi
 
         echo "--- Carpetas modificadas encontradas ---"
-        echo "$MODIFIED_FOLDERS_LIST"
+        echo "$_MODIFIED_FOLDERS_LIST"
         echo "----------------------------------------"
-        echo "MODIFIED_FOLDER_LIST=\"$MODIFIED_FOLDERS_LIST\"" >> /workspace/env.sh
+        echo "_MODIFIED_FOLDER_LIST=\"$_MODIFIED_FOLDERS_LIST\"" >> /workspace/env.sh
 
 
   - id: "Desplegar Infraestructura"
