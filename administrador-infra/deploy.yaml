@@ -1,6 +1,6 @@
 steps:
   - id: "Inicio"
-    name: alpine
+    name: gcr.io/cloud-builders/git
     entrypoint: "sh"
     args:
       - "-c"
