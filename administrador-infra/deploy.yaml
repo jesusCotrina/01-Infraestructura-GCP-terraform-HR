@@ -31,15 +31,15 @@ steps:
         _CHANGED=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA | grep "service/" | head -n 1)
 
         if [ -z "$_CHANGED" ]; then
-          echo "No changes found in cloud-run-scraping/"
+          echo "service/"
           echo "MODIFIED_FOLDER=" >> /workspace/env.sh
           exit 0
         fi
 
-        FOLDER=$(echo $_CHANGED | cut -d'/' -f1-3)
+        _FOLDER=$(echo $_CHANGED | cut -d'/' -f1-3)
 
-        echo "Carpeta modificada: $FOLDER"
-        echo "MODIFIED_FOLDER=$FOLDER" >> /workspace/env.sh
+        echo "Carpeta modificada: $_FOLDER"
+        echo "MODIFIED_FOLDER=$_FOLDER" >> /workspace/env.sh
 
 
   - id: "Desplegar Infraestructura"
