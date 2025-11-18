@@ -10,6 +10,17 @@ steps:
         echo "rama $BRANCH_NAME"
         echo "Repositorio: $REPO_NAME"
         echo "Commit: $COMMIT_SHA"
+        CHANGED_FILES=$(git diff --name-only $COMMIT_SHA~1 $COMMIT_SHA)
+
+        echo "Archivos modificados:"
+        echo "$CHANGED_FILES"
+
+        # Extraer solo las carpetas raíz modificadas
+        CHANGED_DIRS=$(echo "$CHANGED_FILES" | awk -F/ '{print $1}' | sort -u)
+
+        echo "Carpetas modificadas:"
+        echo "$CHANGED_DIRS"
+
 
   - id: "Desplegar Infraestructura"
     name: hashicorp/terraform:1.7.0
@@ -17,7 +28,7 @@ steps:
     args:
         - -c
         - |
-          cd terraform
+          cd administrador-infra/terraform
           echo "====Ejecutando terraform===="
           terraform init -input=false
 
