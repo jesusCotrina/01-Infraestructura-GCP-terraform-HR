@@ -10,18 +10,36 @@ steps:
         echo "rama $BRANCH_NAME"
         echo "Repositorio: $REPO_NAME"
         echo "Commit: $COMMIT_SHA"
-        git diff-tree --no-commit-id --name-only -r $COMMIT_SHA > changed_files.txt
 
-        echo "Archivos modificados:"
-        cat changed_files.txt
+  - id: "Detectar carpeta modificada"
+    name: alpine/git
+    entrypoint: sh
+    args:
+      - -c
+      - |
+        echo "== Clonando repo con historial =="
+        git clone https://source.developers.google.com/p/$PROJECT_ID/r/$REPO_NAME repo
+        cd repo
 
-        # Obtener carpetas modificadas
-        cat changed_files.txt \
-          | awk -F'/' '{print $1}' \
-          | sort -u > changed_dirs.txt
+        git checkout $COMMIT_SHA
 
-        echo "Carpetas modificadas:"
-        cat changed_dirs.txt
+        PREV_COMMIT=$(git rev-parse $COMMIT_SHA~1)
+
+        echo "Commit actual: $COMMIT_SHA"
+        echo "Commit previo : $PREV_COMMIT"
+
+        CHANGED=$(git diff --name-only $PREV_COMMIT $COMMIT_SHA | grep "service/" | head -n 1)
+
+        if [ -z "$CHANGED" ]; then
+          echo "No changes found in cloud-run-scraping/"
+          echo "MODIFIED_FOLDER=" >> /workspace/env.sh
+          exit 0
+        fi
+
+        FOLDER=$(echo $CHANGED | cut -d'/' -f1-3)
+
+        echo "Carpeta modificada: $FOLDER"
+        echo "MODIFIED_FOLDER=$FOLDER" >> /workspace/env.sh
 
 
   - id: "Desplegar Infraestructura"
@@ -43,3 +61,7 @@ steps:
 
 options:
   logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  PROJECT_ID: ""
+  REPO_NAME: ""

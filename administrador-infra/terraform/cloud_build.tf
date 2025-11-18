@@ -43,6 +43,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
         for_each = lookup(each.value, "event_type", "") == "push" ? [1] : []
         content {
           branch       = "^${lookup(each.value, "branch_name", "main")}$"
+
           invert_regex = false
         }
       }
@@ -55,6 +56,8 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
       }
     }
   }
+
+  included_files = lookup(each.value, "include_files", ["/**"])
 
   dynamic "pubsub_config" {
     for_each = each.value.event_type == "pubsub" ? [1] : []

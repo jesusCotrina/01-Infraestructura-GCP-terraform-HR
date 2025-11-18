@@ -1,0 +1,21 @@
+{
+    "cloud_scheduler_config": 
+        { 
+        "10":{
+        "name": "inicio-clinica-internacional",
+        "description": "Scheduler para iniciar el Cloud Run de clinica internacional",
+        "schedule": "0 9 * * 1-5",
+        "time_zone": "America/Lima",
+        "enabled": "true"
+        },
+        "11": 
+        {
+        "name": "inicio-san-felipe",
+        "description": "Scheduler para iniciar el Cloud Run de clinica internacional",
+        "schedule": "0 9 * * 1-5",
+        "time_zone": "America/Lima",
+        "code_scrap": 11,
+        "enabled": "true"
+        }
+    }
+}

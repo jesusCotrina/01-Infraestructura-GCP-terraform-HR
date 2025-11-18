@@ -1,0 +1,74 @@
+steps:
+  - id: "Inicio"
+    name: alpine
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        # Autenticarse con GCP
+        echo "Iniciado despliegue"
+        echo "rama $BRANCH_NAME"
+        echo "Repositorio: $REPO_NAME"
+        echo "Commit: $COMMIT_SHA"
+        echo "_DPLOY_TYPE: $_DPLOY_TYPE"
+        echo "_CODE_IMAGE: $_CODE_IMAGE"
+  
+  - id: "Clonar código del Cloud Build A"
+    name: gcr.io/cloud-builders/git
+    entrypoint: "sh"
+    args:
+      - -c
+      - |
+        git clone https://source.developers.google.com/p/${_PROJECT_ID}/r/${_REPO_CODE} /workspace/app
+        echo "Código clonado en /workspace/app"
+
+
+  - id: "Build and Push Docker Image"
+    name: "gcr.io/cloud-builders/docker"
+    entrypoint: "sh"
+    args:
+      - -c
+      - |
+        if [ "$_DPLOY_TYPE" = "image" ]; then
+          echo "==== Building Docker Image ===="
+          docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG} ./workspace/app/${_PATH_GCR}
+
+          echo "==== Pushing Docker Image ===="
+          docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG}
+
+          echo "export deploy_after_image=true" >> /workspace/env.sh
+          echo "==== DONE ===="
+        fi
+
+  - id: "Desplegar Infraestructura"
+    name: hashicorp/terraform:1.7.0
+    entrypoint: sh
+    args:
+        - -c
+        - |
+          echo "====cargando variables"
+          source /workspace/env.sh
+
+          if [ "$_DPLOY_TYPE" = "terraform" ] || [ "${deploy_after_image}" = "true" ]; then
+            cd framework-scraping-infra/terraform
+            echo "====Ejecutando terraform===="
+            terraform init -input=false
+
+            echo "====Ejecutando plan===="
+            terraform plan -out=tfplan
+
+            echo "====Ejecutando apply===="
+            terraform apply -auto-approve -state=tfplan
+            echo "termino despliegue..."
+
+          fi
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _CODE_IMAGE: "10"
+  _DPLOY_TYPE: "terraform"
+  _IMAGE_TAG: "latest"
+  "_REPO_CODE": "a"
+  "_PROJECT_ID": "a"

@@ -17,6 +17,25 @@
       "pubsub_topic": "",
       "webhook_secret": ""
           
+    },
+    {
+      "name":"deploy-frmk-scraping-infra-trrfm",
+      "description": "Despliegue de la infraestructura del framework de scrapeo",
+      "project_id": "data-engineer-410822",
+      "region": "us-east4",
+      "service_account": "sa-deploy-infra-frmk-scrp@data-engineer-410822.iam.gserviceaccount.com",
+
+      "file_yaml": "deploy.yaml",
+      "event_type": "push", 
+      "branch_name": "develop",
+      "repo_type": "GITHUB",
+      "repo_uri": "projects/data-engineer-410822/locations/us-east4/connections/github-repo-jcotrina/repositories/01-Infraestructura-GCP-terraform-HR",
+      "repo_name": "01-Infraestructura-GCP-terraform-HR",
+      "owner_repo": "jesusCotrina",
+      "pubsub_topic": "",
+      "webhook_secret": "",
+      "include_files": ["framework-scraping-infra/**"]
+          
     }
   ]
   
