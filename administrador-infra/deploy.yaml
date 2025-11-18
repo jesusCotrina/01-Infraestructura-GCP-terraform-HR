@@ -18,28 +18,36 @@ steps:
       - -c
       - |
         echo "== Clonando repo con historial =="
-        git clone https://source.developers.google.com/p/$_PROJECT_ID/r/$REPO_NAME repo
+        gcloud source repos clone $_REPO_NAME repo --project=$_PROJECT_ID
         cd repo
 
         git checkout $COMMIT_SHA
 
-        _PREV_COMMIT=$(git rev-parse "${COMMIT_SHA}~1")
+        _PREV_COMMIT=$(git rev-parse "${COMMIT_SHA}~1" 2>/dev/null || echo "")
 
         echo "Commit actual: $COMMIT_SHA"
-        echo "Commit previo : $_PREV_COMMIT"
+        echo "Commit previo : ${_PREV_COMMIT:-"N/A (primer commit/push)"}"
 
-        _CHANGED=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA | grep "service/" | head -n 1)
-
-        if [ -z "$_CHANGED" ]; then
-          echo "service/"
-          echo "MODIFIED_FOLDER=" >> /workspace/env.sh
-          exit 0
+        if [ -z "$_PREV_COMMIT" ]; then
+            # Si no hay commit previo (primer push), listamos todos los directorios service/
+            CHANGED_FILES=$(find service/ -type f)
+        else
+            # Obtenemos la lista completa de archivos cambiados
+            CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
         fi
 
-        _FOLDER=$(echo $_CHANGED | cut -d'/' -f1-3)
+        MODIFIED_FOLDERS_LIST=$(echo "$CHANGED_FILES" | grep "administrador-infra/" | cut -d'/' -f1-3 | sort | uniq)
 
-        echo "Carpeta modificada: $_FOLDER"
-        echo "MODIFIED_FOLDER=$_FOLDER" >> /workspace/env.sh
+        if [ -z "$MODIFIED_FOLDERS_LIST" ]; then
+          echo "No se encontraron cambios en ninguna carpeta dentro de service/"
+          echo "MODIFIED_FOLDER=" >> /workspace/env.sh
+          exit 0 # Salir si no hay nada que desplegar
+        fi
+
+        echo "--- Carpetas modificadas encontradas ---"
+        echo "$MODIFIED_FOLDERS_LIST"
+        echo "----------------------------------------"
+        echo "MODIFIED_FOLDER_LIST=\"$MODIFIED_FOLDERS_LIST\"" >> /workspace/env.sh
 
 
   - id: "Desplegar Infraestructura"
