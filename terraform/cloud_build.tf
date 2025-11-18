@@ -12,9 +12,6 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   location        = each.value.region
   service_account = "projects/${each.value.project_id}/serviceAccounts/${each.value.service_account}"
 
-  # Archivo cloudbuild.yaml dentro del repo
-  filename = each.value.file_yaml
-
   dynamic "git_file_source" {
     for_each = each.value.repo_uri != null ? [1] : []
     content {
