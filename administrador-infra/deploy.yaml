@@ -34,8 +34,9 @@ steps:
         
         # Obtenemos la lista completa de archivos cambiados
         echo "Obtenmos diferencias"
-        _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
-        echo "Archivos detectados por git diff:"
+        _CHANGED_FILES=$(git log --name-only $_PREV_COMMIT..$COMMIT_SHA --pretty="" | sort | uniq)
+
+        echo "Archivos detectados por git log (RAW):"
         echo "$_CHANGED_FILES"
         
 
