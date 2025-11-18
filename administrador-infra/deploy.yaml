@@ -12,13 +12,13 @@ steps:
         echo "Commit: $COMMIT_SHA"
 
   - id: "Detectar carpeta modificada"
-    name: gcr.io/cloud-builders/git
+    name: alpine/git
     entrypoint: sh
     args:
       - -c
       - |
 
-        git fetch --depth=2 
+        git fetch --unshallow 2>/dev/null || git fetch --all --tags
 
         # Verificar si el fetch funcionó
         if [ $? -ne 0 ]; then
@@ -34,9 +34,8 @@ steps:
         
         # Obtenemos la lista completa de archivos cambiados
         echo "Obtenmos diferencias"
-        _CHANGED_FILES=$(git log --name-only $_PREV_COMMIT..$COMMIT_SHA --pretty="" | sort | uniq)
-
-        echo "Archivos detectados por git log (RAW):"
+        _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
+        echo "Archivos detectados por git diff:"
         echo "$_CHANGED_FILES"
         
 
