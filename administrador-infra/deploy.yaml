@@ -17,9 +17,6 @@ steps:
     args:
       - -c
       - |
-        echo "== Clonando repo con historial =="
-        gcloud source repos clone $_REPO_NAME repo --project=$_PROJECT_ID
-        cd repo
 
         git fetch --depth=2 
 
@@ -42,7 +39,7 @@ steps:
             _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
         fi
 
-        _MODIFIED_FOLDERS_LIST=$(echo "$_CHANGED_FILES" | grep "administrador-infra/" | cut -d'/' -f1-2 | sort | uniq)
+        _MODIFIED_FOLDERS_LIST=$(echo "$_CHANGED_FILES" | grep "administrador-infra/" | cut -d'/' -f1-3 | sort | uniq)
 
         if [ -z "$_MODIFIED_FOLDERS_LIST" ]; then
           echo "No se encontraron cambios relevantes en administrador-infra/."
