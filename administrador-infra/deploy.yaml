@@ -17,10 +17,10 @@ steps:
     args:
       - -c
       - |
-        REPO_URL="https://github.com/$_REPO_OWNER/$REPO_NAME.git"
+        _REPO_URL="https://github.com/$_REPO_OWNER/$REPO_NAME.git"
 
         echo "Clonando repo manualmente..."
-        git clone "$REPO_URL" repo
+        git clone "$_REPO_URL" repo
         cd repo
 
         _PREV_COMMIT=$(git rev-parse "$COMMIT_SHA^1")
