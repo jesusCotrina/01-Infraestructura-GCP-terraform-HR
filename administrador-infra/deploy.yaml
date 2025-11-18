@@ -23,7 +23,7 @@ steps:
 
         git checkout $COMMIT_SHA
 
-        PREV_COMMIT=$(git rev-parse $COMMIT_SHA~1)
+        PREV_COMMIT=$(git rev-parse "${COMMIT_SHA}~1")
 
         echo "Commit actual: $COMMIT_SHA"
         echo "Commit previo : $PREV_COMMIT"
