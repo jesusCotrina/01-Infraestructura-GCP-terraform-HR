@@ -63,5 +63,4 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
-  PROJECT_ID: ""
-  REPO_NAME: ""
+  PROJECT_ID: "data-engineer-410822"
