@@ -36,6 +36,7 @@ steps:
             _CHANGED_FILES=$(find administrador-infra/ -type f)
         else
             # Obtenemos la lista completa de archivos cambiados
+            echo "Obtenmos diferencias"
             _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
         fi
 
