@@ -18,7 +18,7 @@ steps:
       - -c
       - |
 
-        git fetch origin --prune --tags --force --depth=1000
+        git fetch --unshallow 2>/dev/null || git fetch --all --tags
 
         # Verificar si el fetch funcionó
         if [ $? -ne 0 ]; then
@@ -26,7 +26,7 @@ steps:
           exit 1
         fi
 
-        _PREV_COMMIT=$(git rev-parse "${COMMIT_SHA}~1" 2>/dev/null || echo "")
+        _PREV_COMMIT=$(git rev-parse "$COMMIT_SHA^1")
 
         echo "Commit actual: $COMMIT_SHA"
         echo "Commit previo : ${_PREV_COMMIT:-"N/A (primer commit/push)"}"
