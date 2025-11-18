@@ -1,0 +1,16 @@
+{
+  "datasets": [
+    {
+      "dataset_name": "scraping_data",
+      "location": "US-EAST4",
+      "friendly_name": "Dataset Framework Scraping",
+      "description": "Contiene tablas con datos obtenidos mediante scraping"
+    },
+    {
+      "dataset_name": "de__external",
+      "location": "US-EAST4",
+      "friendly_name": "Dataset de Data Entrys Externos",
+      "description": "Contiene Data Entrys cargados desde fuentes externas"
+    }
+  ]
+}

@@ -3,13 +3,13 @@
     {
       "name": "data-rawzone-jcotrina",
       "project": "data-engineer-410822",
+      "description": "Bucket de Raw Zone para datos en crudo",
       "location": "US-CENTRAL1",
       "storage_class": "STANDARD",
       "uniform_bucket_level_access": true,
       "versioning": true,
       "force_destroy": true,
       "public_access_prevention": "enforced",
-      "retention_policy": {},
       "labels": {
           "env": "dev",
           "team": "data"
@@ -19,6 +19,7 @@
     {
       "name": "rawzone-tf-backend-state-frmk-scrp",
       "project": "data-engineer-410822",
+      "description": "Bucket para almacenar el estado de Terraform del proyecto Framework Scraping",
       "location": "US-EAST4",
       "storage_class": "STANDARD",
       "uniform_bucket_level_access": true,
@@ -26,8 +27,8 @@
       "force_destroy": true,
       "public_access_prevention": "enforced",
       "labels": {
-        "env": "prod",
-        "team": "analytics"
+        "env": "dev",
+        "team": "data"
       }
     }
   ]
