@@ -1,7 +1,7 @@
 {
   "buckets": [
     {
-      "name": "data-rawzone",
+      "name": "data-rawzone-jcotrina",
       "project": "data-engineer-410822",
       "location": "US-CENTRAL1",
       "storage_class": "STANDARD",
