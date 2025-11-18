@@ -10,16 +10,18 @@ steps:
         echo "rama $BRANCH_NAME"
         echo "Repositorio: $REPO_NAME"
         echo "Commit: $COMMIT_SHA"
-        CHANGED_FILES=$(git diff --name-only $COMMIT_SHA~1 $COMMIT_SHA)
+        git diff-tree --no-commit-id --name-only -r $COMMIT_SHA > changed_files.txt
 
         echo "Archivos modificados:"
-        echo "$CHANGED_FILES"
+        cat changed_files.txt
 
-        # Extraer solo las carpetas raíz modificadas
-        CHANGED_DIRS=$(echo "$CHANGED_FILES" | awk -F/ '{print $1}' | sort -u)
+        # Obtener carpetas modificadas
+        cat changed_files.txt \
+          | awk -F'/' '{print $1}' \
+          | sort -u > changed_dirs.txt
 
         echo "Carpetas modificadas:"
-        echo "$CHANGED_DIRS"
+        cat changed_dirs.txt
 
 
   - id: "Desplegar Infraestructura"
