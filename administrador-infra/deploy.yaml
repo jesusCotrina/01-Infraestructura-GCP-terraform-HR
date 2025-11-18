@@ -21,7 +21,13 @@ steps:
         gcloud source repos clone $_REPO_NAME repo --project=$_PROJECT_ID
         cd repo
 
-        git checkout $COMMIT_SHA
+        git fetch --depth=2 
+
+        # Verificar si el fetch funcionó
+        if [ $? -ne 0 ]; then
+          echo "Error al obtener el historial de Git."
+          exit 1
+        fi
 
         _PREV_COMMIT=$(git rev-parse "${COMMIT_SHA}~1" 2>/dev/null || echo "")
 
