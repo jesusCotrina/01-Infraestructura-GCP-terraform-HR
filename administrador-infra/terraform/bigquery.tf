@@ -4,7 +4,7 @@ locals {
 
 resource "google_bigquery_dataset" "dataset" {
   for_each = {
-    for d in local.dataset_config : d.dataset_name => d
+    for d in local.dataset_config.datasets : d.dataset_name => d
   }
 
   dataset_id    = each.value.dataset_name
