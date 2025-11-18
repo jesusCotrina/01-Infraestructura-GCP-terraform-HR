@@ -3,16 +3,18 @@
      {
       "name":"deploy-frmk-scraping",
       "description": "Despliegue automático del framework de scraping web pública",
+      "project_id": "data-engineer-410822",
+      "region": "us-east4",
+      "service_account": "deploy-framework-dev@data-engineer-410822.iam.gserviceaccount.com",
+
       "file_yaml": "deploy.yaml",
-      "repo_type": "GITHUB",
       "event_type": "push", 
       "branch_name": "develop",
       "repo_uri": "projects/data-engineer-410822/locations/us-east4/connections/github-repo-jcotrina/repositories/jesusCotrina-Framework-Scraping-Web-Publica-v1",
-      "service_account": "deploy-framework-dev@data-engineer-410822.iam.gserviceaccount.com",
       "owner_repo": "jesusCotrina",
       "pubsub_topic": "",
-      "project_id": "data-engineer-410822",
-      "region": "us-east4"
+      "webhook_secret": ""
+          
     }
-]
+  ]
 }

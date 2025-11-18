@@ -1,7 +1,7 @@
 {
   "buckets": [
     {
-      "name": "data-rawzone-dev",
+      "name": "data-rawzone",
       "project": "data-engineer-410822",
       "location": "US-CENTRAL1",
       "storage_class": "STANDARD",
@@ -9,9 +9,7 @@
       "versioning": true,
       "force_destroy": true,
       "public_access_prevention": "enforced",
-      "retention_policy": {
-          "retention_days": 1
-        },
+      "retention_policy": {},
       "labels": {
           "env": "dev",
           "team": "data"
