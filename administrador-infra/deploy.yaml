@@ -31,16 +31,13 @@ steps:
         echo "Commit actual: $COMMIT_SHA"
         echo "Commit previo : ${_PREV_COMMIT:-"N/A (primer commit/push)"}"
 
-        if [ -z "$_PREV_COMMIT" ]; then
-            # Si no hay commit previo (primer push), listamos todos los directorios service/
-            _CHANGED_FILES=$(find administrador-infra/ -type f)
-        else
-            # Obtenemos la lista completa de archivos cambiados
-            echo "Obtenmos diferencias"
-            _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
-            echo "Archivos detectados por git diff:"
-            echo "$_CHANGED_FILES"
-        fi
+        
+        # Obtenemos la lista completa de archivos cambiados
+        echo "Obtenmos diferencias"
+        _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
+        echo "Archivos detectados por git diff:"
+        echo "$_CHANGED_FILES"
+        
 
         _MODIFIED_FOLDERS_LIST=$(echo "$_CHANGED_FILES" | grep "administrador-infra/" | cut -d'/' -f1-3 | sort | uniq)
 
