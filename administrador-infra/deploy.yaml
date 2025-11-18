@@ -17,7 +17,7 @@ steps:
     args:
       - -c
       - |
-        _REPO_URL="https://github.com/$_REPO_OWNER/$REPO_NAME.git"
+        _REPO_URL="https://github.com/${_REPO_OWNER}/${REPO_NAME}.git"
         echo "$_REPO_URL"
         echo "Clonando repo manualmente..."
         git clone "$_REPO_URL" repo
