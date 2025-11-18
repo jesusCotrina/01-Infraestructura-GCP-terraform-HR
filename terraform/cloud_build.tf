@@ -3,7 +3,7 @@ locals {
   config_env       = jsondecode(file(abspath("../env.json")))
 }
 
-resource "google_cloudbuildv2_trigger" "cloud_build_triggers" {
+resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   for_each = { for cb in local.list_cloud_build.triggers : cb.name => cb }
 
   name            = "${each.value.name}-${local.config_env.pre_env_name}"
@@ -11,29 +11,51 @@ resource "google_cloudbuildv2_trigger" "cloud_build_triggers" {
   project         = each.value.project_id
   location        = each.value.region
   service_account = "projects/${each.value.project_id}/serviceAccounts/${each.value.service_account}"
-  repository      = "projects/.../connections/.../repositories/<repo>"
-  filename        = each.value.file_yaml
 
-  build {
-    dynamic "push" {
-      for_each = each.value.event_type == "push" ? [1] : []
-      content {
-        branch = each.value.branch_name
-        # O: tag = each.value.tag_name
-      }
+  # Archivo cloudbuild.yaml dentro del repo
+  filename = each.value.file_yaml
+
+  dynamic "git_file_source" {
+    for_each = each.value.repo_uri != null ? [1] : []
+    content {
+      path      = lookup(each.value, "file_yaml", "cloudbuild.yaml")
+      repo_type = lookup(each.value, "repo_type", "GITHUB")
+      # revision puede ser refs/heads/<branch> o regex según tu uso en legacy
+      revision  = "refs/heads/${lookup(each.value, "branch_name", "main")}"
+      uri       = each.value.repo_uri
     }
+  }
 
-    dynamic "pull_request" {
-      for_each = each.value.event_type == "pull_request" ? [1] : []
-      content {
-        branch = each.value.branch_name
-      }
+  dynamic "source_to_build" {
+    for_each = each.value.repo_uri != null ? [1] : []
+    content {
+      uri       = each.value.repo_uri
+      ref       = "refs/heads/${lookup(each.value, "branch_name", "main")}"
+      repo_type = lookup(each.value, "repo_type", "GITHUB")
     }
+  }
 
-    # Para manual
-    dynamic "manual" {
-      for_each = each.value.event_type == "manual" ? [1] : []
-      content {}
+  dynamic "github" {
+    for_each = lookup(each.value, "repo_type", "") == "GITHUB" ? [1] : []
+    content {
+      owner = lookup(each.value, "owner_repo", null)
+      # si no tienes name, intenta extraerla del uri (último segmento)
+      name  = lookup(each.value, "repo_name", basename(each.value.repo_uri))
+
+      dynamic "push" {
+        for_each = lookup(each.value, "event_type", "") == "push" ? [1] : []
+        content {
+          branch       = "^${lookup(each.value, "branch_name", "main")}$"
+          invert_regex = false
+        }
+      }
+
+      dynamic "pull_request" {
+        for_each = lookup(each.value, "event_type", "") == "pull_request" ? [1] : []
+        content {
+          branch = "^${lookup(each.value, "branch_name", "main")}$"
+        }
+      }
     }
   }
 

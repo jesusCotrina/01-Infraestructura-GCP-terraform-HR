@@ -10,7 +10,9 @@
       "file_yaml": "deploy.yaml",
       "event_type": "push", 
       "branch_name": "develop",
+      "repo_type": "GITHUB",
       "repo_uri": "projects/data-engineer-410822/locations/us-east4/connections/github-repo-jcotrina/repositories/jesusCotrina-Framework-Scraping-Web-Publica-v1",
+      "repo_name": "Framework-Scraping-Web-Publica-v1",
       "owner_repo": "jesusCotrina",
       "pubsub_topic": "",
       "webhook_secret": ""
