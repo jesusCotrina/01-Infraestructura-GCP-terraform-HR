@@ -21,7 +21,7 @@ steps:
       - |
         git clone https://github.com/jesusCotrina/02-framework-scraping-HR.git repo
         echo "Código clonado en repo"
-        ls -la
+        
 
   - id: "Build and Push Docker Image"
     name: "gcr.io/cloud-builders/docker"
@@ -31,6 +31,7 @@ steps:
       - |
         if [ "$_DPLOY_TYPE" = "image" ]; then
           echo "==== Building Docker Image ===="
+          ls -la
           image_name="img-scr-$_CODE_IMAGE"
           echo "image name ${image_name}"
           docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${image_name}:${_IMAGE_TAG} ./repo/src/cloud-run-scraping/${_PATH_GCR}
