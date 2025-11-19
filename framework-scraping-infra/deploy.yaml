@@ -31,12 +31,12 @@ steps:
       - |
         if [ "$_DPLOY_TYPE" = "image" ]; then
           echo "==== Building Docker Image ===="
-          _IMAGE_NAME = "img-scr-${_CODE_IMAGE}"
-          echo "image name $_IMAGE_NAME"
-          docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG} ./repo/src/cloud-run-scraping/${_PATH_GCR}
+          IMAGE_NAME = "img-scr-$_CODE_IMAGE"
+          echo "image name ${IMAGE_NAME}"
+          docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${IMAGE_NAME}:${_IMAGE_TAG} ./repo/src/cloud-run-scraping/${_PATH_GCR}
 
           echo "==== Pushing Docker Image ===="
-          docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG}
+          docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${IMAGE_NAME}:${_IMAGE_TAG}
 
           echo "export deploy_after_image=true" >> /workspace/env.sh
           echo "==== DONE ===="
