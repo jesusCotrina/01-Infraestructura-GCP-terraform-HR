@@ -36,6 +36,25 @@
       "webhook_secret": "",
       "include_files": ["framework-scraping-infra/**"]
           
+    },
+    {
+      "name":"deploy-code-frmk-scraping",
+      "description": "Despliegue del codio de scrapeo",
+      "project_id": "data-engineer-410822",
+      "region": "us-east4",
+      "service_account": "sa-deploy-code-frmk-scrp@data-engineer-410822.iam.gserviceaccount.com",
+
+      "file_yaml": "deploy.yaml",
+      "event_type": "push", 
+      "branch_name": "develop",
+      "repo_type": "GITHUB",
+      "repo_uri": "projects/data-engineer-410822/locations/us-east4/connections/github-repo-jcotrina/repositories/jesusCotrina-02-framework-scraping-HR",
+      "repo_name": "02-framework-scraping-HR",
+      "owner_repo": "jesusCotrina",
+      "pubsub_topic": "",
+      "webhook_secret": "",
+      "include_files": ["/**"]
+          
     }
   ]
   
