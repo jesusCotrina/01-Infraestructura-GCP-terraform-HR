@@ -43,6 +43,7 @@ steps:
           echo "==== DONE ===="
         fi
 
+
   - id: "Desplegar Infraestructura"
     name: hashicorp/terraform:1.7.0
     entrypoint: sh
