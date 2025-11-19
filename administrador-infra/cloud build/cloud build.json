@@ -5,7 +5,7 @@
       "description": "Despliegue automático del framework de scraping web pública",
       "project_id": "data-engineer-410822",
       "region": "us-east4",
-      "service_account": "deploy-framework-dev@data-engineer-410822.iam.gserviceaccount.com",
+      "service_account": "sa-deploy-code-frmk-scrp@data-engineer-410822.iam.gserviceaccount.com",
 
       "file_yaml": "deploy.yaml",
       "event_type": "push", 
