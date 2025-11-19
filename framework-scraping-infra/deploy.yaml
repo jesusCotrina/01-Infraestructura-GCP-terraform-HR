@@ -51,7 +51,7 @@ steps:
         - -c
         - |
           echo "====cargando variables"
-          # source /workspace/env.sh
+          source /workspace/env.sh
           echo "valor de despliegue: ${despliegue}"
 
           if [ "$_DPLOY_TYPE" = "terraform" ] || [ "$despliegue" = "si" ]; then
