@@ -25,7 +25,7 @@
       "region": "us-east4",
       "service_account": "sa-deploy-infra-frmk-scrp@data-engineer-410822.iam.gserviceaccount.com",
 
-      "file_yaml": "deploy.yaml",
+      "file_yaml": "framework-scraping-infra/deploy.yaml",
       "event_type": "push", 
       "branch_name": "develop",
       "repo_type": "GITHUB",
