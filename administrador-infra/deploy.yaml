@@ -34,7 +34,6 @@ steps:
         echo "Commit previo : ${_PREV_COMMIT:-"N/A (primer commit/push)"}"
         echo "Git diff"
         git show --name-only --pretty="" $COMMIT_SHA
-        git diff --name-only $_PREV_COMMIT $COMMIT_SHA
 
         # Obtenemos la lista completa de archivos cambiados
         echo "Obtenmos diferencias"
