@@ -48,4 +48,5 @@ resource "google_cloud_scheduler_job" "gsc_jobcrun3" {
     min_backoff_duration = "5s"
     retry_count          = 0
   }
+  
 }
