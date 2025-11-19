@@ -60,7 +60,6 @@ steps:
             echo "====Ejecutando apply===="
             terraform apply -auto-approve -state=tfplan
             echo "termino despliegue..."
-
           fi
 
 options:
