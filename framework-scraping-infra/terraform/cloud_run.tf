@@ -20,9 +20,12 @@ resource "google_cloud_run_service" "gcr_scrapers" {
                         tonumber(replace(each.value.ram, "Gi", "")) > 4 ? 2 : 1)
           }
         }
-        env {
-            name = each.value.parameters.key
-            value = jsonencode(each.value.parameters)
+        dynamic "env" {
+          for_each = each.value.parameters
+          content {
+            name  = env.key
+            value = env.value
+          }
         }
       }
       service_account_name        = local.env_vars.service_account_ejecucion
