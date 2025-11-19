@@ -17,10 +17,9 @@ steps:
     args:
       - -c
       - |
-      
+        echo "Iniciando git clone"
         _REPO_URL_1="https://github.com/jesusCotrina/01-Infraestructura-GCP-terraform-HR.git"
         echo "$_REPO_URL_1"
-        echo "Clonando repo manualmente..."
         git clone "$_REPO_URL_1" repo
         cd repo
 
