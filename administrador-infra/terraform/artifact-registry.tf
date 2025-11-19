@@ -1,5 +1,5 @@
 locals {
-  repos = jsondecode(file("../bigquery/artifact-registry.json")).repositories
+  repos = jsondecode(file("../artifact-registry/repositorios.json")).repositories
 }
 
 resource "google_artifact_registry_repository" "repos" {
