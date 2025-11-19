@@ -26,7 +26,7 @@
       "service_account": "sa-deploy-infra-frmk-scrp@data-engineer-410822.iam.gserviceaccount.com",
 
       "file_yaml": "framework-scraping-infra/deploy.yaml",
-      "event_type": "push", 
+      "event_type": "manual", 
       "branch_name": "develop",
       "repo_type": "GITHUB",
       "repo_uri": "projects/data-engineer-410822/locations/us-east4/connections/github-repo-jcotrina/repositories/jesusCotrina-01-Infraestructura-GCP-terraform-HR",
