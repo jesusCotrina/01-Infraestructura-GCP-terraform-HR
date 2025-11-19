@@ -29,6 +29,8 @@ steps:
     args:
       - -c
       - |
+        touch /workspace/env.sh
+        
         if [ "$_DPLOY_TYPE" = "image" ]; then
           echo "==== Building Docker Image ===="
           ls -la
@@ -42,6 +44,7 @@ steps:
           echo "despliegue=si" >> /workspace/env.sh
           echo "==== DONE ===="
         fi
+
 
 
   - id: "Desplegar Infraestructura"
