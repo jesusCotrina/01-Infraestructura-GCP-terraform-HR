@@ -31,7 +31,7 @@ steps:
       - |
         if [ "$_DPLOY_TYPE" = "image" ]; then
           echo "==== Building Docker Image ===="
-          _IMAGE_NAME="img-scr-$_CODE_IMAGE"
+          _IMAGE_NAME = "img-scr-$_CODE_IMAGE"
           echo "image name $_IMAGE_NAME"
           docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG} ./repo/src/cloud-run-scraping/${_PATH_GCR}
 
