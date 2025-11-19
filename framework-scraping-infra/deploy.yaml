@@ -22,7 +22,6 @@ steps:
         git clone https://github.com/jesusCotrina/02-framework-scraping-HR.git repo
         echo "Código clonado en repo"
 
-
   - id: "Build and Push Docker Image"
     name: "gcr.io/cloud-builders/docker"
     entrypoint: "sh"
