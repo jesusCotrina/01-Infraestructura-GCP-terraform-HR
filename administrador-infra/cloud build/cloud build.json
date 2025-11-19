@@ -53,7 +53,7 @@
       "owner_repo": "jesusCotrina",
       "pubsub_topic": "",
       "webhook_secret": "",
-      "include_files": ["/**"]
+      "include_files": ["**"]
           
     }
   ]
