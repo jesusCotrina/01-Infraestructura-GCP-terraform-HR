@@ -19,6 +19,19 @@ steps:
       - |
         echo "Iniciando git clone"
         git clone "https://github.com/jesusCotrina/01-Infraestructura-GCP-terraform-HR.git" repo
+        
+        echo "Contenido de /workspace/repo:"
+        ls -la
+
+        echo "Contenido de la carpeta clonada:"
+        ls -la repo
+
+        echo "Verificando si existe .git:"
+        if [ -d "repo/.git" ]; then
+            echo ".git encontrado"
+        else
+            echo ".git NO encontrado"
+        fi
         cd repo
 
         _PREV_COMMIT=$(git rev-parse "$COMMIT_SHA^1")
