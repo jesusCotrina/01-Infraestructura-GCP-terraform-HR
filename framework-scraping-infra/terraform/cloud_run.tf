@@ -11,7 +11,7 @@ resource "google_cloud_run_service" "gcr_scrapers" {
   template {
     spec {
       containers {
-        image = "${local.env_vars.region}-docker.pkg.dev/${local.env_vars.project}/${local.env_vars.repositorio_artifact_registry}/${local.env_vars.prefijo_artifact}-${each.value.code}-${each.value.name_scrap}:latest"
+        image = "${local.env_vars.region}-docker.pkg.dev/${local.env_vars.project}/${local.env_vars.repositorio_artifact_registry}/${local.env_vars.prefijo_artifact}-${each.value.code}:latest"
         resources {
           limits = {
             memory = each.value.ram

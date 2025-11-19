@@ -21,6 +21,7 @@ steps:
       - |
         git clone https://github.com/jesusCotrina/02-framework-scraping-HR.git repo
         echo "Código clonado en repo"
+        ls -la
 
   - id: "Build and Push Docker Image"
     name: "gcr.io/cloud-builders/docker"
@@ -30,10 +31,12 @@ steps:
       - |
         if [ "$_DPLOY_TYPE" = "image" ]; then
           echo "==== Building Docker Image ===="
-          docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG} ./workspace/app/${_PATH_GCR}
+          _IMAGE_NAME="img-scr-$_CODE_IMAGE"
+          echo "image name $_IMAGE_NAME"
+          docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG} ./repo/src/cloud-run-scraping/${_PATH_GCR}
 
           echo "==== Pushing Docker Image ===="
-          docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG}
+          docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_TAG}
 
           echo "export deploy_after_image=true" >> /workspace/env.sh
           echo "==== DONE ===="
@@ -65,8 +68,10 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
+  _REGION: "us-east4"
   _CODE_IMAGE: "10"
-  _DPLOY_TYPE: "terraform"
+  _DPLOY_TYPE: "image"
   _IMAGE_TAG: "latest"
-  "_REPO_CODE": "a"
-  "_PROJECT_ID": "a"
+  _PROJECT_ID: "data-engineer-410822"
+  _PATH_GCR: "cr-scrp-10-clinica-internacional"
+  _REPO_NAME: "frmk-scraping-images"
