@@ -73,7 +73,7 @@ options:
 substitutions:
   _REGION: "us-east4"
   _CODE_IMAGE: "10"
-  _DPLOY_TYPE: "image"
+  _DPLOY_TYPE: "terraform"
   _IMAGE_TAG: "latest"
   _PROJECT_ID: "data-engineer-410822"
   _PATH_GCR: "cr-scrp-10-clinica-internacional"
