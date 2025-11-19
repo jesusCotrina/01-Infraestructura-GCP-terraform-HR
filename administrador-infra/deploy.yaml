@@ -18,14 +18,15 @@ steps:
       - -c
       - |
         echo "Iniciando git clone"
-        
+        git clone --depth=1000 https://github.com/jesusCotrina/01-Infraestructura-GCP-terraform-HR.git repo
+        cd repo
         echo "Contenido de /workspace/repo:"
         ls -la
 
         echo "git log"
         git log --oneline -n 10
 
-        git fetch --unshallow || git fetch --depth=1000
+        git checkout $COMMIT_SHA
 
         _PREV_COMMIT=$(git rev-parse "$COMMIT_SHA^1" 2>/dev/null || echo "")
 
