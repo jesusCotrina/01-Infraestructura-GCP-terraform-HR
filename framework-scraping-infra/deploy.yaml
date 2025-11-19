@@ -70,6 +70,7 @@ steps:
             echo "termino despliegue..."
           fi
 
+
 options:
   logging: CLOUD_LOGGING_ONLY
 
