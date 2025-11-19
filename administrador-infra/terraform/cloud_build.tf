@@ -12,13 +12,8 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   location        = each.value.region
   service_account = "projects/${each.value.project_id}/serviceAccounts/${each.value.service_account}"
 
-  dynamic "filename" {
-    for_each = lookup(each.value, "event_type", "") == "manual" ? [1] : []
-    content  = lookup(each.value, "file_yaml", "deploy.yaml")
-  }
-
   dynamic "git_file_source" {
-    for_each = (lookup(each.value, "event_type", "") != "manual" && each.value.repo_uri != null) ? [1] : []
+    for_each = (each.value.repo_uri != null) ? [1] : []
     content {
       path      = lookup(each.value, "file_yaml", "cloudbuild.yaml")
       repo_type = lookup(each.value, "repo_type", "GITHUB")
@@ -29,7 +24,7 @@ resource "google_cloudbuild_trigger" "cloud_build_triggers" {
   }
 
   dynamic "source_to_build" {
-    for_each = (lookup(each.value, "event_type", "") != "manual" && each.value.repo_uri != null) ? [1] : []
+    for_each = (each.value.repo_uri != null) ? [1] : []
     content {
       uri       = each.value.repo_uri
       ref       = "refs/heads/${lookup(each.value, "branch_name", "main")}"
