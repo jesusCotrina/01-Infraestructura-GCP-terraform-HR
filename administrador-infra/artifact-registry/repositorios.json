@@ -1,0 +1,11 @@
+{
+  "repositories": [
+    {
+      "id": "frmk-scraping-images",
+      "location": "us-east4",
+      "format": "DOCKER",
+      "description": "Repositorio de imágenes del framework",
+      "project_id": "data-engineer-410822"
+    }
+  ]
+}
