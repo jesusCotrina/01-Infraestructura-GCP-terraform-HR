@@ -22,7 +22,7 @@
       "location": "US-EAST4",
       "storage_class": "STANDARD",
       "uniform_bucket_level_access": true,
-      "versioning": false,
+      "versioning": true,
       "force_destroy": true,
       "public_access_prevention": "enforced",
       "labels": {
