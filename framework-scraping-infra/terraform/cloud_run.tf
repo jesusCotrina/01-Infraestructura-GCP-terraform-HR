@@ -1,10 +1,10 @@
 locals {
-  cloud_runs = jsondecode(file("../config/cloud_run.json"))
+  cloud_runs = jsondecode(file("../config/cloud_run.json")).cloud_run_config
 }
 
 
 resource "google_cloud_run_service" "gcr_scrapers" {
-  for_each = { for key,value in local.cloud_runs.cloud_run_config : key=> value }
+  for_each = { for key,value in local.cloud_runs : key=> value }
   name     = "${local.env_vars.prefijo_crun}-${each.key}-${each.value.name_scrap}"
   project  = local.env_vars.project
   location = local.env_vars.region
