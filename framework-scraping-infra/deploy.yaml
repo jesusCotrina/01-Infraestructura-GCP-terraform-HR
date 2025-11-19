@@ -47,7 +47,7 @@ steps:
         - -c
         - |
           echo "====cargando variables"
-          source /workspace/env.sh
+          # source /workspace/env.sh
 
           if [ "$_DPLOY_TYPE" = "terraform" ] || [ "${deploy_after_image}" = "true" ]; then
             cd framework-scraping-infra/terraform
