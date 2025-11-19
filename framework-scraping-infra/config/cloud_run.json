@@ -3,7 +3,7 @@
         "10": {
                 "name_scrap": "clinica-internacional",
                 "code": "10",
-                "ram": "8Gi",
+                "ram": "2Gi",
                 "parameters": {
                 "bucket_output":"gs://data-lake-raw-01/clínica_internacional/",
                 "url_pagina":"https://www.clinica-internacional.com.pe/trabaja-con-nosotros/",
@@ -14,7 +14,7 @@
         "11":{
             "name_scrap": "san-felipe",
             "code": "11",
-            "ram": "8Gi",
+            "ram": "2Gi",
             "parameters": {
                 "bucket_output":"gs://data-lake-raw-01/clínica_internacional/",
                 "url_pagina":"https://www.clinica-internacional.com.pe/trabaja-con-nosotros/",

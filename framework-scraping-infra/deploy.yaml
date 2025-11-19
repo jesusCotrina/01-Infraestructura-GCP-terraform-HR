@@ -19,8 +19,8 @@ steps:
     args:
       - -c
       - |
-        git clone https://source.developers.google.com/p/${_PROJECT_ID}/r/${_REPO_CODE} /workspace/app
-        echo "Código clonado en /workspace/app"
+        git clone https://github.com/jesusCotrina/02-framework-scraping-HR.git repo
+        echo "Código clonado en repo"
 
 
   - id: "Build and Push Docker Image"
