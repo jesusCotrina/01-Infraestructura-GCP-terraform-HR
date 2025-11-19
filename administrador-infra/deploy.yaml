@@ -18,7 +18,7 @@ steps:
       - -c
       - |
         echo "Iniciando git clone"
-        git clone ""https://github.com/jesusCotrina/01-Infraestructura-GCP-terraform-HR.git" repo
+        git clone "https://github.com/jesusCotrina/01-Infraestructura-GCP-terraform-HR.git" repo
         cd repo
 
         _PREV_COMMIT=$(git rev-parse "$COMMIT_SHA^1")
