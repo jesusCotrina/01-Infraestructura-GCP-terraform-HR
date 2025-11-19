@@ -29,7 +29,7 @@ resource "google_cloud_scheduler_job" "gsc_jobcrun3" {
   http_target {
     http_method = "POST"
     #Activamos el control
-    uri         = google_cloud_run_service.gcr_scrapers[each.key].uri
+    uri         = google_cloud_run_service.gcr_scrapers[each.key].status[0].url
     body        = base64encode(jsonencode({
       tipo                = "Activnado desde cloud run"
     }) )  
@@ -37,7 +37,7 @@ resource "google_cloud_scheduler_job" "gsc_jobcrun3" {
     headers     = {"Content-Type" = "application/json"}
     oidc_token {
       #Activamos el control
-      audience              = google_cloud_run_service.gcr_scrapers[each.key].uri
+      audience              = google_cloud_run_service.gcr_scrapers[each.key].status[0].url
       service_account_email = local.env_vars.service_account_ejecucion
     }
   }
