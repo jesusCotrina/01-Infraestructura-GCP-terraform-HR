@@ -28,12 +28,13 @@ steps:
 
         git checkout $COMMIT_SHA
 
-        _PREV_COMMIT=$(git rev-parse "$COMMIT_SHA^1" 2>/dev/null || echo "")
+        _PREV_COMMIT=$(git rev-parse "$COMMIT_SHA^1")
 
         echo "Commit actual: $COMMIT_SHA"
         echo "Commit previo : ${_PREV_COMMIT:-"N/A (primer commit/push)"}"
+        echo "Git diff"
+        git diff --name-only $_PREV_COMMIT $COMMIT_SHA
 
-        
         # Obtenemos la lista completa de archivos cambiados
         echo "Obtenmos diferencias"
         _CHANGED_FILES=$(git diff --name-only $_PREV_COMMIT $COMMIT_SHA)
