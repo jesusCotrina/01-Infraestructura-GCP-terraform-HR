@@ -36,7 +36,6 @@ resource "google_cloud_run_service" "gcr_scrapers" {
     metadata {
       annotations = {
         "run.googleapis.com/client-name"  = "terraform"
-        "run.googleapis.com/vpc-access-egress"  = "private-ranges-only"
         "deployment-timestamp" = timestamp()   
       }      
     }
