@@ -32,12 +32,12 @@ steps:
         if [ "$_DPLOY_TYPE" = "image" ]; then
           echo "==== Building Docker Image ===="
           ls -la
-          image_name="img-scr-$_CODE_IMAGE"
+          image_name="img-scrp-$_CODE_IMAGE"
           echo "image name ${image_name}"
-          # docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${image_name}:${_IMAGE_TAG} ./repo/src/cloud-run-scraping/${_PATH_GCR}
+          docker build -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${image_name}:${_IMAGE_TAG} ./repo/src/cloud-run-scraping/${_PATH_GCR}
 
-          # echo "==== Pushing Docker Image ===="
-          # docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${image_name}:${_IMAGE_TAG}
+          echo "==== Pushing Docker Image ===="
+          docker push ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${image_name}:${_IMAGE_TAG}
 
           echo "despliegue=si" >> /workspace/env.sh
           echo "==== DONE ===="
