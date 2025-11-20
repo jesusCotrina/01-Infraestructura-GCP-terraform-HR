@@ -51,3 +51,10 @@ resource "google_cloud_scheduler_job" "gsc_jobcrun3" {
 
     depends_on = [ google_cloud_run_service.gcr_scrapers ]
 }
+
+output "cloud_run_urls" {
+  value = {
+    for k, v in google_cloud_run_service.gcr_scrapers :
+    k => v.status[0].url
+  }
+}
