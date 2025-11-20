@@ -29,6 +29,21 @@
         "env": "dev",
         "team": "data"
       }
+    },
+    {
+      "name": "raw-fmrk-scraping-data",
+      "project": "data-engineer-410822",
+      "description": "Bucket para almacenar los datos del proyecto Framework Scraping",
+      "location": "US-EAST4",
+      "storage_class": "STANDARD",
+      "uniform_bucket_level_access": true,
+      "versioning": true,
+      "force_destroy": true,
+      "public_access_prevention": "enforced",
+      "labels": {
+        "env": "dev",
+        "team": "data"
+      }
     }
   ]
 }
