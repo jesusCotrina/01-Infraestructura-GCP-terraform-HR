@@ -27,7 +27,7 @@ resource "google_cloud_scheduler_job" "gsc_jobcrun3" {
   region           = local.env_vars.region
   time_zone        = each.value.time_zone
   http_target {
-    http_method = "GET"
+    http_method = "POST"
     #Activamos el control
     uri         = google_cloud_run_service.gcr_scrapers[each.key].status[0].url
     body        = base64encode(jsonencode({
