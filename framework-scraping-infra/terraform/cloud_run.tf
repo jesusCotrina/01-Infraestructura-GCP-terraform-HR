@@ -1,5 +1,5 @@
 locals {
-  cloud_runs = jsondecode(file("../config/cloud_run.json")).cloud_run_config
+  cloud_runs = local.config_consolidado.cloud_run_config
 }
 
 

@@ -1,5 +1,5 @@
 locals {
-  cloud_schedulers = jsondecode(file("../config/cloud_scheduler.json")).cloud_scheduler_config
+  cloud_schedulers = local.config_consolidado.cloud_scheduler_config
   cloud_schedulers_config = {
     for code, sched in local.cloud_schedulers :
     code => merge(
@@ -48,5 +48,5 @@ resource "google_cloud_scheduler_job" "gsc_jobcrun3" {
     min_backoff_duration = "5s"
     retry_count          = 0
   }
-  
+
 }
