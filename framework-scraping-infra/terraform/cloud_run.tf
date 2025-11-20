@@ -32,6 +32,12 @@ resource "google_cloud_run_service" "gcr_scrapers" {
             name = "BUCKET_OUTPUT"
             value = local.env_vars.bucket_output
         }
+
+        env {
+            name = "PROJECT_ID"
+            value = local.env_vars.project
+        }
+
       }
       service_account_name        = local.env_vars.service_account_ejecucion
       container_concurrency       = 100
