@@ -45,7 +45,23 @@ steps:
           echo "==== DONE ===="
         fi
 
+  - id: "Descargar config desde bucket GCS"
+    name: gcr.io/cloud-builders/gcloud 
+    entrypoint: bash
+    args: 
+      - -c
+      - |
+        bucket_name="rawzone-tf-backend-state-frmk-scrp"
+        source_file="config/config_consolidado.json"
+        des_path="./framework-scraping-infra/config/"
 
+
+        # Copia el archivo desde GCS a la ruta local
+        # El comando sobrescribirá automáticamente si el archivo ya existe
+        gcloud storage cp gs://${bucket_name}/${source_file} ${des_path}
+
+        cat framework-scraping-infra/config/config_consolidado.json
+        echo "Archivo descargado a ${des_path}"
 
   - id: "Desplegar Infraestructura"
     name: hashicorp/terraform:1.7.0
