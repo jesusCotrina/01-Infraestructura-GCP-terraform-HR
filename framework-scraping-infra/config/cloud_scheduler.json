@@ -14,7 +14,6 @@
         "description": "Scheduler para iniciar el Cloud Run de clinica internacional",
         "schedule": "0 9 * * 1-5",
         "time_zone": "America/Lima",
-        "code_scrap": 11,
         "enabled": "true"
         }
     }

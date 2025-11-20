@@ -5,11 +5,13 @@
                 "code": "10",
                 "ram": "2Gi",
                 "parameters": {
-                "bucket_output":"gs://data-lake-raw-01/clínica_internacional/",
-                "url_pagina":"https://www.clinica-internacional.com.pe/trabaja-con-nosotros/",
-                "data_set": "scraping_data",
-                "table_name": "clinica_internacional"
+                    "bucket_output":"gs://data-lake-raw-01/clínica_internacional/",
+                    "url_pagina":"https://www.clinica-internacional.com.pe/trabaja-con-nosotros/",
+                    "data_set": "scraping_data",
+                    "table_name": "clinica_internacional"
                 }
+
+
         },
         "11":{
             "name_scrap": "san-felipe",
