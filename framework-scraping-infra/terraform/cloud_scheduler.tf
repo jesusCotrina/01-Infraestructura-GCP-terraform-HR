@@ -49,4 +49,5 @@ resource "google_cloud_scheduler_job" "gsc_jobcrun3" {
     retry_count          = 0
   }
 
+    depends_on = [ google_cloud_run_service.gcr_scrapers ]
 }
