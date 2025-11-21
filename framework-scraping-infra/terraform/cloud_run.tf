@@ -23,8 +23,8 @@ resource "google_cloud_run_service" "gcr_scrapers" {
         dynamic "env" {
           for_each = each.value.cloud_run_config.parameters
           content {
-            name  = env.value.key
-            value = env.value.value
+            name  = env.key
+            value = env.value
           }
         }
 
