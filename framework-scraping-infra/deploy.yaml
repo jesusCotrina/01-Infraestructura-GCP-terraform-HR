@@ -19,7 +19,7 @@ steps:
     args:
       - -c
       - |
-        git clone https://github.com/jesusCotrina/02-framework-scraping-HR.git repo
+        git clone https://github.com/jesusCotrina/02-motor-scraping-HR.git repo
         echo "Código clonado en repo"
         
 
