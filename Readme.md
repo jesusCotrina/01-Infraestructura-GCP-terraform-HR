@@ -47,6 +47,7 @@ Ejemplo mínimo de `config`:
     "DB_PASSWORD": "secret"
   }
 }
+```
 
 ## Buenas prácticas recomendadas
 
