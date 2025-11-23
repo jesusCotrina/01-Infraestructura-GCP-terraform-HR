@@ -48,22 +48,30 @@ Ejemplo mínimo de `config`:
   }
 }
 
-Buenas prácticas recomendadas
+## Buenas prácticas recomendadas
 
-Estado remoto: configurar backend gcs con locking para evitar colisiones.
+### Estado remoto
+Configurar backend GCS con locking para evitar colisiones.
 
-No versionar secretos: usar Secret Manager y referenciar secrets desde Terraform.
+### No versionar secretos
+Usar Secret Manager y referenciar secrets desde Terraform.
 
-Imágenes: no usar :latest para despliegues; taggear con SHA ($SHORT_SHA) para reproducibilidad.
+### Imágenes
+No usar :latest para despliegues; taggear con SHA ($SHORT_SHA) para reproducibilidad.
 
-Min/Max scale: definir autoscaling.knative.dev/minScale cuando se requiera evitar cold starts.
+### Min/Max scale
+Definir autoscaling.knative.dev/minScale cuando se requiera evitar cold starts.
 
-CPU en idle: run.googleapis.com/cpu-throttling = "false" si necesitas CPU fuera de request.
+### CPU en idle
+run.googleapis.com/cpu-throttling = "false" si necesitas CPU fuera de request.
 
-Importar recursos existentes: terraform import para recursos creados manualmente.
+### Importar recursos existentes
+Usar `terraform import` para recursos creados manualmente.
 
-Separar entornos: usar workspaces, carpetas o variables por entorno.
+### Separar entornos
+Usar workspaces, carpetas o variables por entorno.
 
-Autor
+---
 
-Jesús Cotrina — Infraestructura, automatización y despliegue en GCP
+## Autor
+Jesús Cotrina – Infraestructura, automatización y despliegue en GCP
