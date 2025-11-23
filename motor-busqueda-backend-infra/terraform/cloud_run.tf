@@ -23,7 +23,7 @@ resource "google_cloud_run_service" "cloudrun_service" {
           }
         }
         dynamic "env" {
-          for_each = each.value.env
+          for_each = local.config.env
           content {
             name  = env.key
             value = env.value
