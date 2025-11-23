@@ -10,37 +10,28 @@ resource "google_cloud_run_service" "cloudrun_service" {
   project  = local.env_vars.project
   location = local.config.location
 
+  metadata {
+    annotations = {
+      "run.googleapis.com/ingress" = "all"
+    }
+  }
+
   template {
+    metadata {
+      annotations = {
+        "run.googleapis.com/client-name"  = "terraform"
+        "deployment-timestamp"            = timestamp()
+      }
+    }
+
     spec {
       containers {
         image = "${local.env_vars.region}-docker.pkg.dev/${local.env_vars.project}/${local.config.repositorio}/backend-motor-busqueda:latest"
-        resources {
-          limits = {
-            memory = local.config.memory
-            cpu    = tostring(
-                        tonumber(replace(local.config.memory, "Gi", "")) > 8 ? 4 : 
-                        tonumber(replace(local.config.memory, "Gi", "")) > 4 ? 2 : 1)
-          }
-        }
-        dynamic "env" {
-          for_each = local.config.env
-          content {
-            name  = env.key
-            value = env.value
-          }
-        }
+        
       }
       service_account_name        = local.env_vars.service_account_ejecucion
       container_concurrency       = 100
       timeout_seconds             = 3600
-    }
-
-    metadata {
-      annotations = {
-        "run.googleapis.com/client-name"  = "terraform"
-        "deployment-timestamp" = timestamp()   
-        "run.googleapis.com/ingress"      = "all"
-      }      
     }
   }
 
@@ -48,7 +39,6 @@ resource "google_cloud_run_service" "cloudrun_service" {
     percent         = 100
     latest_revision = true
   }
-  
 }
 
 resource "google_cloud_run_service_iam_member" "invoker" {
