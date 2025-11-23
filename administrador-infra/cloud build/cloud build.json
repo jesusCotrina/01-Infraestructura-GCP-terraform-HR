@@ -52,8 +52,7 @@
       "owner_repo": "jesusCotrina",
       "pubsub_topic": "",
       "webhook_secret": "",
-      "include_files": ["**"]
-          
+      "include_files": ["**"] 
     },
     {
       "name":"deploy-backend-motor-busqueda",
@@ -71,7 +70,7 @@
       "owner_repo": "jesusCotrina",
       "pubsub_topic": "",
       "webhook_secret": "",
-      "include_files": ["framework-scraping-infra/**"]
+      "include_files": ["motor-busqueda-backend-infra/**"]
           
     }
   ]
