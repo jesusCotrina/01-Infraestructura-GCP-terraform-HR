@@ -1,7 +1,7 @@
 {
   "service_name": "motor-busqueda",
   "location": "us-east4",
-  "repositorio":"",
+  "repositorio":"backend-motor-busqueda",
   "cpu": 1,
   "memory": "1Gi",
   "concurrency": 80,
@@ -9,5 +9,5 @@
     "DB_URL": "production",
     "LOG_LEVEL": "info"
   }
-  
+
 }

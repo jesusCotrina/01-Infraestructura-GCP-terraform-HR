@@ -7,6 +7,7 @@ locals {
 
 resource "google_cloud_run_v2_service" "cloudrun_service" {
   name     = local.config.service_name
+  project  = local.env_vars.project
   location = local.config.location
 
   template {
