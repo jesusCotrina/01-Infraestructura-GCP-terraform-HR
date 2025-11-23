@@ -28,6 +28,13 @@ resource "google_cloud_run_service" "cloudrun_service" {
       containers {
         image = "${local.env_vars.region}-docker.pkg.dev/${local.env_vars.project}/${local.config.repositorio}/backend-motor-busqueda:latest"
         
+        dynamic "env" {
+          for_each = local.config.env
+          content {
+            name  = env.key
+            value = env.value
+          }
+        }
       }
       service_account_name        = local.env_vars.service_account_ejecucion
       container_concurrency       = 100
