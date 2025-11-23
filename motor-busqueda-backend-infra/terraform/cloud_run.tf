@@ -54,4 +54,5 @@ resource "google_cloud_run_service_iam_member" "invoker" {
   service  = google_cloud_run_service.cloudrun_service.name
   role     = "roles/run.invoker"
   member   = "allUsers"
+  depends_on = [google_cloud_run_service.cloudrun_service]
 }
