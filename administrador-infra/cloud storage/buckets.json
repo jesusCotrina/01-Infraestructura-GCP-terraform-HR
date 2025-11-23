@@ -44,6 +44,21 @@
         "env": "dev",
         "team": "data"
       }
+    },
+    {
+      "name": "raw-tf-backend-motor-busqueda",
+      "project": "data-engineer-410822",
+      "description": "Bucket para almacenar el tf state del motor de busqueda",
+      "location": "US-EAST4",
+      "storage_class": "STANDARD",
+      "uniform_bucket_level_access": true,
+      "versioning": true,
+      "force_destroy": true,
+      "public_access_prevention": "enforced",
+      "labels": {
+        "env": "dev",
+        "team": "data"
+      }
     }
   ]
 }

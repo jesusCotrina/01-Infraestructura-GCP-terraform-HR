@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "rawzone-tf-backend-state-frmk-scrp" 
+    bucket = "raw-tf-backend-motor-busqueda" 
     prefix = "state/init"
     
   }
