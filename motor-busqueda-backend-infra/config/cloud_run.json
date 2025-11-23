@@ -6,7 +6,7 @@
   "memory": "1Gi",
   "concurrency": 80,
   "env": {
-    "DB_URL": "production",
+    "DATABASE_URL": "postgresql://jcotrina:qZBwMl5rRWt6O7qI6MZOqdlu650hiHy4@dpg-d4ftj73e5dus739f1j50-a.virginia-postgres.render.com/motor_busqueda",
     "LOG_LEVEL": "info"
   }
 
