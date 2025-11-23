@@ -1,0 +1,36 @@
+steps:
+  - id: "Inicio"
+    name: gcr.io/cloud-builders/git
+    entrypoint: "sh"
+    args:
+      - "-c"
+      - |
+        # Autenticarse con GCP
+        echo "Iniciado despliegue"
+        echo "rama $BRANCH_NAME"
+        echo "Repositorio: $REPO_NAME"
+        echo "Commit: $COMMIT_SHA"
+
+  - id: "Desplegar Infraestructura"
+    name: hashicorp/terraform:1.7.0
+    entrypoint: sh
+    args:
+        - -c
+        - |
+          cd motor-busqueda-backend-infra/terraform
+          echo "====Ejecutando terraform===="
+          terraform init -input=false
+
+          echo "====Ejecutando plan===="
+          terraform plan -out=tfplan
+
+          echo "====Ejecutando apply===="
+          terraform apply -auto-approve -state=tfplan
+          echo "termino despliegue..."
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _PROJECT_ID: "data-engineer-410822"
+  _REPO_OWNER: "jesusCotrina"

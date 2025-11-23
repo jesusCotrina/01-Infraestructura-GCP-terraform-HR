@@ -1,0 +1,12 @@
+{
+  "service_name": "api-busqueda",
+  "location": "us-central1",
+  "image": "us-docker.pkg.dev/mi-proyecto/mi-repo/api-busqueda:latest",
+  "cpu": 1,
+  "memory": "512Mi",
+  "concurrency": 80,
+  "env": {
+    "APP_ENV": "production",
+    "LOG_LEVEL": "info"
+  }
+}

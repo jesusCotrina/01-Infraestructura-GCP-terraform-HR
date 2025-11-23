@@ -1,0 +1,12 @@
+{
+  "service_name": "motor-busqueda",
+  "location": "us-east4",
+  "repositorio":"",
+  "cpu": 1,
+  "memory": "1Gi",
+  "concurrency": 100,
+  "env": {
+    "DB_URL": "production",
+    "LOG_LEVEL": "info"
+  }
+}
