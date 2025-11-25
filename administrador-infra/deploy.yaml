@@ -47,12 +47,15 @@ steps:
           echo "====Ejecutando terraform===="
           terraform init -input=false
 
-          echo "====Ejecutando plan===="
-          terraform plan -out=tfplan
+          echo "====Destruyendo terraform===="
+          terraform destroy -auto-approve
 
-          echo "====Ejecutando apply===="
-          terraform apply -auto-approve -state=tfplan
-          echo "termino despliegue..."
+          # echo "====Ejecutando plan===="
+          # terraform plan -out=tfplan
+
+          # echo "====Ejecutando apply===="
+          # terraform apply -auto-approve -state=tfplan
+          # echo "termino despliegue..."
 
 options:
   logging: CLOUD_LOGGING_ONLY
